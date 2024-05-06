@@ -1,0 +1,8 @@
+<nav mat-tab-nav-bar [backgroundColor]="background" [tabPanel]="tabPanel">
+    <a mat-tab-link routerLink="/home" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Startsidan</a>
+    <a mat-tab-link routerLink="/courses" routerLinkActive #rlb="routerLinkActive" [active]="rlb.isActive">Kurser</a>
+    <a mat-tab-link routerLink="/frameschedule" routerLinkActive #rlc="routerLinkActive" [active]="rlc.isActive">Ramschema</a>
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+<h4>TESTAR header sidan</h4>
