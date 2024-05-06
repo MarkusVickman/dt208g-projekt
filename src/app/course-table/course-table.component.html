@@ -29,6 +29,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Fruit </th>
         <td mat-cell *matCellDef="let row"> {{row.fruit}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="add">
+        <th mat-header-cell *matHeaderCellDef> Lägg till </th>
+        <td mat-cell *matCellDef="let row"><button title="{{row.id}}">Lägg till</button></td>
+      </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

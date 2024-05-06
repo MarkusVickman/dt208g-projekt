@@ -15,7 +15,7 @@ interface Transaction {
   imports: [MatTableModule, CurrencyPipe]
 })
 export class FrameScheduleComponent{
-  displayedColumns: string[] = ['item', 'cost'];
+  displayedColumns: string[] = ['item', 'cost', 'remove'];
   transactions: Transaction[] = [
     {item: 'Beach ball', cost: 4},
     {item: 'Towel', cost: 5},
