@@ -11,30 +11,25 @@ import { FrameScheduleComponent } from './frame-schedule/frame-schedule.componen
 import { CourseTableComponent } from './course-table/course-table.component';
 import { FrameSchedulePageComponent } from './frame-schedule-page/frame-schedule-page.component';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderMenuComponent } from './header-menu/header-menu.component';
 import { FrameScheduleSmallComponent } from './frame-schedule-small/frame-schedule-small.component';
 
 //Modules from Material UI
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { HeaderMenuComponent } from './header-menu/header-menu.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    StartPageComponent,
-    CoursePageComponent,
-    FrameScheduleComponent,
-    CourseTableComponent,
-    FrameSchedulePageComponent,
-    FooterComponent,
-    FrameScheduleSmallComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    MatSlideToggleModule,
     AppRoutingModule,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    CoursePageComponent,
+    FrameSchedulePageComponent,
+    FooterComponent
   ],
   providers: [
     provideAnimationsAsync()

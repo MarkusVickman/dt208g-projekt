@@ -20,7 +20,4 @@ export class HeaderMenuComponent {
     this.background = this.background ? undefined : 'primary';
   }
 
-  addLink() {
-    this.links.push(`Link ${this.links.length + 1}`);
-  }
 }
