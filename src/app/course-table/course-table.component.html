@@ -1,7 +1,21 @@
-<mat-form-field>
+<div  id="table">
+<mat-form-field class="mat-form-field">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
 </mat-form-field>
+
+<mat-form-field class="mat-form-field">
+  <mat-label>Alla ämnen</mat-label>
+  <mat-select [(value)]="selected" (valueChange)="selectFilter()">
+    <mat-option value="">Alla</mat-option>
+    <mat-option value="Datateknik">Datateknik</mat-option>
+    <mat-option value="Datavetenskap">Datavetenskap</mat-option>
+    <mat-option value="Elektroteknik">Elektroteknik</mat-option>
+    <mat-option value="Matematik">Matematik</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
@@ -32,12 +46,12 @@
 
     <ng-container matColumnDef="syllabus">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursplan </th>
-      <td mat-cell *matCellDef="let row"> {{row.syllabus}} </td>
+      <td mat-cell *matCellDef="let row"> <a href="{{row.syllabus}}">Kursplan</a> </td>
     </ng-container>
 
     <ng-container matColumnDef="add">
       <th mat-header-cell *matHeaderCellDef> Lägg till </th>
-      <td mat-cell *matCellDef="let row"><button title="{{row.courseCode}}">Lägg till</button></td>
+      <td mat-cell *matCellDef="let row"><button class="add" id="{{row.courseCode}}">Lägg till</button></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -50,4 +64,5 @@
   </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
 </div>
