@@ -29,9 +29,12 @@ export interface Subject {
 })
 
 
-export class FrameScheduleComponent implements OnInit {
+export class FrameScheduleComponent implements AfterViewInit {
   displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
+  @ViewChild(MatSort) sort: MatSort = <MatSort>{};
 
   public static Courses: Courses[] = [];
   //public static FrameSchedule: Courses[] = [];
@@ -39,13 +42,12 @@ export class FrameScheduleComponent implements OnInit {
   selected: string = "";
   subjects: string[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
-  @ViewChild(MatSort) sort: MatSort = <MatSort>{};
+
 
   constructor(private GetFrameScheduleService: GetFrameScheduleService) { }
 
-  ngOnInit() {
-      this.GetFrameScheduleService.getMyCourses().subscribe((data) => {
+  ngAfterViewInit() {
+    this.GetFrameScheduleService.getMyCourses().subscribe((data) => {
       // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(data);
       FrameScheduleComponent.Courses = data;
@@ -58,21 +60,21 @@ export class FrameScheduleComponent implements OnInit {
       this.remove();
     })
   }
-  
-  remove(){
+
+  remove() {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
     main.addEventListener("click", (e) => {
       if ((e.target as HTMLButtonElement).classList.contains('remove')) {
         let test: string = (e.target as HTMLButtonElement).id;
-  
+
         //let result = FrameScheduleComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
-  
+
         //if (result) {
         //FrameScheduleComponent.FrameSchedule.push(result);
         //Localstorage sparar kursdatan
         localStorage.removeItem(test);
-        this.ngOnInit();
-  
+        this.ngAfterViewInit();
+
         //}
       };
     });
@@ -106,7 +108,3 @@ export class FrameScheduleComponent implements OnInit {
     }
   }
 };
-
-document.addEventListener('DOMContentLoaded', () => {
- 
-});

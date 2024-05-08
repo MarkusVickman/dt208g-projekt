@@ -13,6 +13,6 @@ export class GetCoursesService {
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Courses[]> {
-    return this.http.get(this.url);
+    return this.http.get<Courses[]>(this.url);
 }
 }

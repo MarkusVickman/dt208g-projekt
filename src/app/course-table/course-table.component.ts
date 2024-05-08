@@ -41,7 +41,7 @@ export interface Courses {
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule, MatSelectModule, FormsModule, NgFor]
 })
 
-export class CourseTableComponent implements OnInit/*, AfterViewInit */ {
+export class CourseTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
 
@@ -56,7 +56,7 @@ export class CourseTableComponent implements OnInit/*, AfterViewInit */ {
 
   constructor(private GetCoursesService: GetCoursesService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.GetCoursesService.getCourses().subscribe((data) => {
       // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(data);

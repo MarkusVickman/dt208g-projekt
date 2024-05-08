@@ -9,7 +9,9 @@ import { Observable, of } from 'rxjs';
 export class GetFrameScheduleService {
 
   Courses: Courses[] = [];
-  constructor() { 
+  constructor() { }
+
+  getMyCourses()/*: Observable<Courses[]>*/ {
     this.Courses = [];
     if (localStorage.length >= 1) {
       for (let i = 0; i < localStorage.length; i++) {
@@ -21,12 +23,6 @@ export class GetFrameScheduleService {
         this.Courses.push(newCourse);
       }
     }
-  }
-
-  getMyCourses(): Observable<Courses[]> {
-
     return of(this.Courses);
   }
-}
-
-
+};
