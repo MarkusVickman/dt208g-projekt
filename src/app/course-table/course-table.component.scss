@@ -7,3 +7,26 @@ table {
     width: 200px;
     margin: 20px;
   }
+
+  button {
+    background-color: white;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(178, 178, 178);
+    border-width: 1.1px;
+    font-weight: 500;
+    font-size: 0.9em;
+    padding: 5px;
+  }
+
+  button:hover {
+    border-color: black;
+  }
+
+  button:active {
+    background-color: rgb(199, 199, 199);
+  }
+
+  .clickedButton{
+    background-color: rgb(237, 237, 237);
+  }

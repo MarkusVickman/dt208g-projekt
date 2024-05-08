@@ -10,4 +10,5 @@ export interface Courses {
     institutionCode: string;
     subject: string;
     syllabus: string;
-}
+  }
+

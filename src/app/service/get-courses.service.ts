@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Courses } from '../course-table/course-table.component';
+import { Courses } from '../models/Courses';
 
 
 @Injectable({
@@ -13,6 +13,6 @@ export class GetCoursesService {
   constructor(private http: HttpClient) {}
 
   getCourses(): Observable<Courses[]> {
-    return this.http.get<Courses[]>(this.url);
+    return this.http.get(this.url);
 }
 }
