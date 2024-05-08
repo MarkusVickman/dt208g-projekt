@@ -41,7 +41,7 @@ export class FrameScheduleComponent implements AfterViewInit {
   public static filteredCourses: Courses[] = [];
   selected: string = "";
   subjects: string[] = [];
-
+  totalPoints: number = 0;
 
 
   constructor(private GetFrameScheduleService: GetFrameScheduleService) { }
@@ -56,9 +56,16 @@ export class FrameScheduleComponent implements AfterViewInit {
       console.log(FrameScheduleComponent.Courses);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
+      this.calculateTotal();
       this.remove();
     })
+  }
+
+  calculateTotal(){
+    this.totalPoints = 0;
+    for (let i = 0; i < FrameScheduleComponent.Courses.length; i++){
+      this.totalPoints = this.totalPoints + FrameScheduleComponent.Courses[i].points;
+    };
   }
 
   remove() {

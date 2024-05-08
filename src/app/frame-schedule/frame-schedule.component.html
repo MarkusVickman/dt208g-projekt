@@ -1,4 +1,4 @@
-<p>testar</p>
+
 <div  id="table">
   <mat-form-field class="mat-form-field">
     <mat-label>Filter</mat-label>
@@ -65,7 +65,8 @@
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
       </tr>
     </table>
-  
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <p id="totalPoints">Totalt antal HP-poäng: {{totalPoints}}</p>
   </div>
   </div>
