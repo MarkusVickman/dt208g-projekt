@@ -30,7 +30,7 @@ export interface Subject {
 
 
 export class FrameScheduleComponent implements AfterViewInit {
-  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add'];
+  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'show-more'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
@@ -60,6 +60,7 @@ export class FrameScheduleComponent implements AfterViewInit {
       this.calculateTotal();
       this.countCourses();
       this.remove();
+      this.showMore();
     })
   }
 
@@ -71,26 +72,98 @@ export class FrameScheduleComponent implements AfterViewInit {
   }
 
   countCourses(){
-    this.numberOfCourses = 0;
     this.numberOfCourses = FrameScheduleComponent.Courses.length;
   }
- 
+
+  showMore() {
+    const main: HTMLElement = document.getElementById("main") as HTMLElement;
+    main.addEventListener("click", (e) => {
+      if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
+        let test: string = (e.target as HTMLButtonElement).title;
+
+        let result = FrameScheduleComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+        let readMore = document.getElementById("read-more");
+
+        if (result && readMore) {
+          readMore.style.display = "block"; 
+          readMore.innerHTML = "";
+
+          let points = result.points as unknown;
+
+          let h3 = document.createElement("h3");
+          let h3Text = document.createTextNode(result.courseName);
+          h3.style.fontWeight = "500";
+          h3.appendChild(h3Text);
+
+          let p0 = document.createElement("p");
+          let p0Text = document.createTextNode("Kurskod: " + result.courseCode);
+          p0.style.fontWeight = "bold";
+          p0.appendChild(p0Text);
+
+          let p1 = document.createElement("p");
+          let p1Text = document.createTextNode("Nivå: " + result.level);
+          p1.appendChild(p1Text);
+
+          let p2 = document.createElement("p");
+          let p2Text = document.createTextNode("Poäng: " + points as string);
+          p2.appendChild(p2Text);
+
+          let p3 = document.createElement("p");
+          let p3Text = document.createTextNode("Ämne: " + result.subject);
+          p3.appendChild(p3Text);
+
+          let p4 = document.createElement("p");
+          let p4Text = document.createTextNode("Progression: " + result.progression);
+          p4.appendChild(p4Text);
+
+          let a0 = document.createElement("a");
+          let a0Text = document.createTextNode("Kursplan");
+          a0.appendChild(a0Text);
+          a0.href = result.syllabus;
+          a0.style.display = "block";
+
+          let button = document.createElement("button");
+          let buttonText = document.createTextNode("Ta bort");
+          button.appendChild(buttonText);
+          button.id = result.courseCode;
+          button.classList.add("remove-two");
+          button.style.backgroundColor = "white";
+          button.style.borderRadius = "5px";
+          button.style.padding = "5px";
+          button.style.borderWidth = "1px";
+          button.style.borderColor = "black";
+          button.style.margin = "10px";
+
+          readMore.appendChild(h3);
+          readMore.appendChild(p0);
+          readMore.appendChild(p1);
+          readMore.appendChild(p2);
+          readMore.appendChild(p3);
+          readMore.appendChild(p4);
+          readMore.appendChild(a0);
+          readMore.appendChild(button);
+
+
+  
+      }
+      }
+    })
+    };
+  
 
   remove() {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
     main.addEventListener("click", (e) => {
-      if ((e.target as HTMLButtonElement).classList.contains('remove')) {
+      if ((e.target as HTMLButtonElement).classList.contains('remove') || (e.target as HTMLButtonElement).classList.contains('remove-two')) {
         let test: string = (e.target as HTMLButtonElement).id;
 
-        //let result = FrameScheduleComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
-
-        //if (result) {
-        //FrameScheduleComponent.FrameSchedule.push(result);
         //Localstorage sparar kursdatan
         localStorage.removeItem(test);
         this.ngAfterViewInit();
 
-        //}
+        if((e.target as HTMLButtonElement).classList.contains('remove-two')){          
+          document.getElementById("read-more")!.style.display = "none"; 
+        }
       };
     });
   }

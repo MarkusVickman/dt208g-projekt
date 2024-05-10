@@ -17,6 +17,7 @@ button {
   font-weight: 500;
   font-size: 0.9em;
   padding: 5px;
+  margin: 0;
 }
 
 button:hover {
@@ -29,17 +30,40 @@ button:active {
 
 #totalPoints {
   position: relative;
-  top: -35px;
-  text-align: left;
-  left: 20px;
+  text-align: center;
   font-weight: 500;
+  top: 10px;
 }
 
 .none{
+  display: none;
 }
-#test-short{
-  max-width: 30px;
-  width: 30px;
+/*
+.test-short{
+  max-width: 120px;
+  width: 120px;
+}
+
+.extra-short{
+  width: 50px;
+  max-width: 50px;
+}*/
+
+
+#read-more{
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
+  max-width: 100%;
+  left: 50%;
+  top: 200px;
+  transform: translate(-50%);
+  position: fixed;
+  width: 350px;
+background-color: white;
+}
+
+.remove-two{
+  padding: 20px;
+  background-color: white;
 }
 
 option {
@@ -47,11 +71,5 @@ option {
 }
 
 @media screen and (max-width: 700px) {
-  #totalPoints {
-    position: relative;
-    top: 10px;
-    text-align: center;
-    left: 0px;
 
-  }
 }
