@@ -42,6 +42,7 @@ export class FrameScheduleComponent implements AfterViewInit {
   selected: string = "";
   subjects: string[] = [];
   totalPoints: number = 0;
+  numberOfCourses: number = 0;
 
 
   constructor(private GetFrameScheduleService: GetFrameScheduleService) { }
@@ -57,6 +58,7 @@ export class FrameScheduleComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.calculateTotal();
+      this.countCourses();
       this.remove();
     })
   }
@@ -67,6 +69,12 @@ export class FrameScheduleComponent implements AfterViewInit {
       this.totalPoints = this.totalPoints + FrameScheduleComponent.Courses[i].points;
     };
   }
+
+  countCourses(){
+    this.numberOfCourses = 0;
+    this.numberOfCourses = FrameScheduleComponent.Courses.length;
+  }
+ 
 
   remove() {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
