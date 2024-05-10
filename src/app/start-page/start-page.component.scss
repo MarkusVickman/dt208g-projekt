@@ -1,12 +1,87 @@
-*{
+* {
     text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0%;
 }
-h2{
+
+h2 {
     margin-top: 20px;
 }
 
-.img{
-    width: 700px;
+.img {
+    width: 500px;
     height: auto;
+    margin-bottom: -20px;
+}
 
+.tinted-background {
+    position: absolute;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    width: 200px;
+    height: 100px;
+    color: white;
+    left: 50%;
+    transform: translate(-50%);
+    top: 270px;
+}
+
+#h2-tinted{
+    margin-top: 5px;
+}
+
+.article-container{
+    width: 500px;
+    height: 470px;
+    margin: 50px;
+    display: inline-block;
+    background-color: #3F51B5;
+    color: white;
+    vertical-align: top;
+}
+
+p {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: -10px;
+}
+
+#hero {
+    /* max-width: 100%;
+    background-image: url("/assets/images/outside1200.jpg");
+    width: 1200px;
+    height: 600px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;*/
+    max-width: 100%;
+}
+
+#hero-img {
+    max-width: 100%;
+    width: 1200px;
+    height: auto;
+}
+
+button {
+    background-color: white;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(178, 178, 178);
+    border-width: 1.1px;
+    font-weight: 500;
+    font-size: 0.9em;
+    padding: 5px;
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 5px 15px;
+    margin-top: -20px;
+}
+
+button:hover {
+    border-color: white;
+    background-color: whitesmoke;
+    box-shadow: rgba(255, 255, 255, 0.6) 0px 5px 10px;
+}
+
+button:active {
+    background-color: rgb(199, 199, 199);
 }
