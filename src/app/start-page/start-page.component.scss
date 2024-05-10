@@ -11,6 +11,8 @@ h2 {
 
 .img {
     width: 500px;
+    max-width: 100%;
+    max-height: 334px;
     height: auto;
     margin-bottom: -20px;
 }
@@ -26,18 +28,23 @@ h2 {
     top: 270px;
 }
 
-#h2-tinted{
+#h2-tinted {
     margin-top: 5px;
 }
 
-.article-container{
+.article-container {
     width: 500px;
-    height: 470px;
+    max-width: 100%;
     margin: 50px;
     display: inline-block;
     background-color: #3F51B5;
     color: white;
     vertical-align: top;
+}
+
+.article-text {
+    height: 120px;
+    max-width: 100%;
 }
 
 p {
@@ -61,6 +68,7 @@ p {
     max-width: 100%;
     width: 1200px;
     height: auto;
+    margin-top: 1px;
 }
 
 button {
@@ -84,4 +92,70 @@ button:hover {
 
 button:active {
     background-color: rgb(199, 199, 199);
+}
+
+/*Media querie för små skärmar*/
+@media screen and (max-width: 1200px) and (min-width: 500px) {
+    .article-container {
+        width: 46%;
+        margin: 2%;
+        display: inline-block;
+        background-color: #3F51B5;
+        color: white;
+        vertical-align: top;
+    }
+
+    .img {
+        width: 100%;
+        height: auto;
+        margin-bottom: -20px;
+    }
+
+    .article-text {
+        height: 180px;
+    }
+
+    p {
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-top: -10px;
+    }
+    
+    .tinted-background {
+        width: 150px;
+        height: 80px;
+        top: 250px;
+    }
+
+    #h2-tinted {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .article-container {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    p {
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-top: -10px;
+    }
+
+    .article-text {
+        height: 130px;
+    }
+
+    .tinted-background {
+        width: 150px;
+        height: 80px;
+        top: 190px;
+    }
+
+    #h2-tinted {
+        margin-top: 0;
+    }
 }
