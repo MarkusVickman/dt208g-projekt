@@ -5,20 +5,12 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { GetCoursesService } from '../service/get-courses.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { GetFrameScheduleService } from '../service/get-frame-schedule.service';
 import { Courses } from '../models/Courses';
-
-
-export interface Subject {
-  value: string;
-  viewValue: string;
-}
-
 
 @Component({
   selector: 'app-frame-schedule',
@@ -28,7 +20,6 @@ export interface Subject {
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule, MatSelectModule, FormsModule, NgFor]
 })
 
-
 export class FrameScheduleComponent implements AfterViewInit {
   displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'show-more'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
@@ -37,13 +28,11 @@ export class FrameScheduleComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = <MatSort>{};
 
   public static Courses: Courses[] = [];
-  //public static FrameSchedule: Courses[] = [];
   public static filteredCourses: Courses[] = [];
   selected: string = "";
   subjects: string[] = [];
   totalPoints: number = 0;
   numberOfCourses: number = 0;
-
 
   constructor(private GetFrameScheduleService: GetFrameScheduleService) { }
 
@@ -194,7 +183,6 @@ export class FrameScheduleComponent implements AfterViewInit {
       }
     }
   }
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

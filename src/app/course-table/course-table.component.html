@@ -9,15 +9,8 @@
   <mat-select [(value)]="selected" (valueChange)="selectFilter()">
     <mat-option value="">Alla</mat-option>
     <mat-option *ngFor="let subject of subjects" value="{{subject}}">{{ subject }}</mat-option>
-  <!--  <mat-option value="">Alla</mat-option>
-    <mat-option value="Datateknik">Datateknik</mat-option>
-    <mat-option value="Datavetenskap">Datavetenskap</mat-option>
-    <mat-option value="Elektroteknik">Elektroteknik</mat-option>
-    <mat-option value="Matematik">Matematik</mat-option>-->
   </mat-select>
 </mat-form-field>
-
-
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>

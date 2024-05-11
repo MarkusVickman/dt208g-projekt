@@ -12,13 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 
-export interface Subject {
-  value: string;
-  viewValue: string;
-}
-
 //Interface för att typsäkra objecthanteringen för kurser som hämtas i servicen getcourses
-
 export interface Courses {
   courseCode: string;
   subjectCode: string;
@@ -30,8 +24,6 @@ export interface Courses {
   subject: string;
   syllabus: string;
 }
-
-
 
 @Component({
   selector: 'app-course-table',
@@ -66,8 +58,6 @@ export class CourseTableComponent implements AfterViewInit {
       this.readSubject();
       this.showMore();
     })
-    //CourseTableComponent.RestoreMyCourses;
-
   }
 
   showMore() {
@@ -167,20 +157,6 @@ export class CourseTableComponent implements AfterViewInit {
       }
     }
   }
-
-  /*public static RestoreMyCourses() {
-    CourseTableComponent.FrameSchedule = [];
-    if (localStorage.length >= 1) {
-      for (let i = 0; i < localStorage.length; i++) {
-        // set key name
-        const key: string = localStorage.key(i)!;
-        // use key name to retrieve the corresponding value
-        const value: string = localStorage.getItem(key)!;
-        let newCourse: Courses = JSON.parse(value);
-        CourseTableComponent.FrameSchedule.push(newCourse);
-      }
-    }
-  }*/
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
