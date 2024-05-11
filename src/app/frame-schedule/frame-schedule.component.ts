@@ -136,6 +136,17 @@ export class FrameScheduleComponent implements AfterViewInit {
           button.style.borderColor = "black";
           button.style.margin = "10px";
 
+          let button1 = document.createElement("button");
+          let button1Text = document.createTextNode("Stäng");
+          button1.appendChild(button1Text);
+          button1.classList.add("close");
+          button1.style.backgroundColor = "white";
+          button1.style.borderRadius = "5px";
+          button1.style.padding = "5px";
+          button1.style.borderWidth = "1px";
+          button1.style.borderColor = "black";
+          button1.style.margin = "10px";
+
           readMore.appendChild(h3);
           readMore.appendChild(p0);
           readMore.appendChild(p1);
@@ -144,13 +155,13 @@ export class FrameScheduleComponent implements AfterViewInit {
           readMore.appendChild(p4);
           readMore.appendChild(a0);
           readMore.appendChild(button);
+          readMore.appendChild(button1);
         }
       }
-    })
-    closingDiv!.addEventListener("click", (e) => {
+      if ((e.target as HTMLButtonElement).classList.contains('close')) {
         readMore!.style.display = "none";
         closingDiv!.style.display = "none";
-
+      }
     })
   };
 
@@ -168,7 +179,7 @@ export class FrameScheduleComponent implements AfterViewInit {
         localStorage.removeItem(test);
         this.ngAfterViewInit();
 
-        if ((e.target as HTMLButtonElement).classList.contains('remove-two')){
+        if ((e.target as HTMLButtonElement).classList.contains('remove-two')) {
           readMore!.style.display = "none";
           closingDiv!.style.display = "none";
         }
