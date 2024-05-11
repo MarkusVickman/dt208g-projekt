@@ -64,28 +64,30 @@ export class FrameScheduleComponent implements AfterViewInit {
     })
   }
 
-  calculateTotal(){
+  calculateTotal() {
     this.totalPoints = 0;
-    for (let i = 0; i < FrameScheduleComponent.Courses.length; i++){
+    for (let i = 0; i < FrameScheduleComponent.Courses.length; i++) {
       this.totalPoints = this.totalPoints + FrameScheduleComponent.Courses[i].points;
     };
   }
 
-  countCourses(){
+  countCourses() {
     this.numberOfCourses = FrameScheduleComponent.Courses.length;
   }
 
   showMore() {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
+    let readMore = document.getElementById("read-more");
+    let closingDiv = document.getElementById("closingDiv");
+
     main.addEventListener("click", (e) => {
       if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
         let test: string = (e.target as HTMLButtonElement).title;
-
         let result = FrameScheduleComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
-        let readMore = document.getElementById("read-more");
 
         if (result && readMore) {
-          readMore.style.display = "block"; 
+          readMore!.style.display = "block";
+          closingDiv!.style.display = "block";
           readMore.innerHTML = "";
 
           let points = result.points as unknown;
@@ -142,17 +144,22 @@ export class FrameScheduleComponent implements AfterViewInit {
           readMore.appendChild(p4);
           readMore.appendChild(a0);
           readMore.appendChild(button);
-
-
-  
-      }
+        }
       }
     })
-    };
-  
+    closingDiv!.addEventListener("click", (e) => {
+        readMore!.style.display = "none";
+        closingDiv!.style.display = "none";
+
+    })
+  };
+
 
   remove() {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
+    const readMore = document.getElementById("read-more");
+    const closingDiv = document.getElementById("closingDiv");
+
     main.addEventListener("click", (e) => {
       if ((e.target as HTMLButtonElement).classList.contains('remove') || (e.target as HTMLButtonElement).classList.contains('remove-two')) {
         let test: string = (e.target as HTMLButtonElement).id;
@@ -161,8 +168,9 @@ export class FrameScheduleComponent implements AfterViewInit {
         localStorage.removeItem(test);
         this.ngAfterViewInit();
 
-        if((e.target as HTMLButtonElement).classList.contains('remove-two')){          
-          document.getElementById("read-more")!.style.display = "none"; 
+        if ((e.target as HTMLButtonElement).classList.contains('remove-two')){
+          readMore!.style.display = "none";
+          closingDiv!.style.display = "none";
         }
       };
     });

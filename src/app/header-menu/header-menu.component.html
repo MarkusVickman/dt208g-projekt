@@ -1,6 +1,6 @@
 <header>
     <div id="background"><h1 id=logotext>Höga Kusten-Högskolan</h1></div>
-<img src="assets/images/logo.png" id="logo" alt="Logotyp av ett berg."> 
+<a routerLink="/home"><img src="assets/images/logo.png" id="logo" alt="Logotyp av ett berg."></a>
 <nav mat-tab-nav-bar [backgroundColor]="background" [tabPanel]="tabPanel">
     <a mat-tab-link routerLink="/home" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">Startsidan</a>
     <a mat-tab-link routerLink="/courses" routerLinkActive #rlb="routerLinkActive" [active]="rlb.isActive">Kurser</a>

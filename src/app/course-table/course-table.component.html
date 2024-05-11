@@ -24,36 +24,41 @@
 
     <!-- ID Column -->
     <ng-container matColumnDef="courseCode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Kod </th>
-      <td mat-cell *matCellDef="let row"> {{row.courseCode}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Kod</th>
+      <td mat-cell *matCellDef="let row" class="large-screen">{{row.courseCode}}</td>
     </ng-container>
 
     <!-- Progress Column -->
     <ng-container matColumnDef="courseName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursnamn </th>
-      <td mat-cell *matCellDef="let row"> {{row.courseName}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="points">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Poäng </th>
-      <td mat-cell *matCellDef="let row"> {{row.points}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Poäng</th>
+      <td mat-cell *matCellDef="let row">{{row.points}}hp</td>
     </ng-container>
 
     <!-- Fruit Column -->
     <ng-container matColumnDef="subject">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ämne </th>
-      <td mat-cell *matCellDef="let row"> {{row.subject}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Ämne</th>
+      <td mat-cell *matCellDef="let row" class="large-screen">{{row.subject}}</td>
     </ng-container>
 
     <ng-container matColumnDef="syllabus">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursplan </th>
-      <td mat-cell *matCellDef="let row"> <a href="{{row.syllabus}}">Kursplan</a> </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen"> Kursplan </th>
+      <td mat-cell *matCellDef="let row" class="large-screen"><a href="{{row.syllabus}}">Kursplan</a></td>
     </ng-container>
 
     <ng-container matColumnDef="add">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row"><button class="add" id="{{row.courseCode}}">Lägg till</button></td>
+      <td mat-cell *matCellDef="let row"><button class="add large-screen" id="{{row.courseCode}}">Lägg till</button></td>
+    </ng-container>
+
+    <ng-container matColumnDef="show-more">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row"><button class="show-more small-screen" title="{{row.courseCode}}">Läs mer</button></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -67,4 +72,8 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
+</div>
+
+<div id="closingDiv">
+  <div id="read-more"></div>
 </div>

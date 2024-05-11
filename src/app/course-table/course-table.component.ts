@@ -42,7 +42,7 @@ export interface Courses {
 })
 
 export class CourseTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add'];
+  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'show-more'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
@@ -64,10 +64,90 @@ export class CourseTableComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.readSubject();
+      this.showMore();
     })
     //CourseTableComponent.RestoreMyCourses;
 
   }
+
+  showMore() {
+    const main: HTMLElement = document.getElementById("main") as HTMLElement;
+    let readMore = document.getElementById("read-more");
+    let closingDiv = document.getElementById("closingDiv");
+
+    main.addEventListener("click", (e) => {
+      if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
+        let test: string = (e.target as HTMLButtonElement).title;
+        let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+
+        if (result && readMore) {
+          readMore!.style.display = "block";
+          closingDiv!.style.display = "block";
+          readMore.innerHTML = "";
+
+          let points = result.points as unknown;
+
+          let h3 = document.createElement("h3");
+          let h3Text = document.createTextNode(result.courseName);
+          h3.style.fontWeight = "500";
+          h3.appendChild(h3Text);
+
+          let p0 = document.createElement("p");
+          let p0Text = document.createTextNode("Kurskod: " + result.courseCode);
+          p0.style.fontWeight = "bold";
+          p0.appendChild(p0Text);
+
+          let p1 = document.createElement("p");
+          let p1Text = document.createTextNode("Nivå: " + result.level);
+          p1.appendChild(p1Text);
+
+          let p2 = document.createElement("p");
+          let p2Text = document.createTextNode("Poäng: " + points as string);
+          p2.appendChild(p2Text);
+
+          let p3 = document.createElement("p");
+          let p3Text = document.createTextNode("Ämne: " + result.subject);
+          p3.appendChild(p3Text);
+
+          let p4 = document.createElement("p");
+          let p4Text = document.createTextNode("Progression: " + result.progression);
+          p4.appendChild(p4Text);
+
+          let a0 = document.createElement("a");
+          let a0Text = document.createTextNode("Kursplan");
+          a0.appendChild(a0Text);
+          a0.href = result.syllabus;
+          a0.style.display = "block";
+
+          let button = document.createElement("button");
+          let buttonText = document.createTextNode("Lägg till");
+          button.appendChild(buttonText);
+          button.title = result.courseCode;
+          button.classList.add("add-two");
+          button.style.backgroundColor = "white";
+          button.style.borderRadius = "5px";
+          button.style.padding = "5px";
+          button.style.borderWidth = "1px";
+          button.style.borderColor = "black";
+          button.style.margin = "10px";
+
+          readMore.appendChild(h3);
+          readMore.appendChild(p0);
+          readMore.appendChild(p1);
+          readMore.appendChild(p2);
+          readMore.appendChild(p3);
+          readMore.appendChild(p4);
+          readMore.appendChild(a0);
+          readMore.appendChild(button);
+        }
+      }
+    })
+    closingDiv!.addEventListener("click", (e) => {
+        readMore!.style.display = "none";
+        closingDiv!.style.display = "none";
+
+    })
+  };
 
   private readSubject(): void {
     for (let i = 0; i < CourseTableComponent.Courses.length; i++) {
@@ -117,16 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
   main.addEventListener("click", (e) => {
     if ((e.target as HTMLButtonElement).classList.contains('add')) {
       let test: string = (e.target as HTMLButtonElement).id;
-      document.getElementById((e.target as HTMLButtonElement).id)?.classList.add('clickedButton');
+      document.getElementById((e.target as HTMLButtonElement).id)!.classList.add('clickedButton');
       let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
 
-      if (result) {
-        CourseTableComponent.FrameSchedule.push(result);
+        CourseTableComponent.FrameSchedule.push(result!);
         //Localstorage sparar kursdatan
-        localStorage.setItem(test, JSON.stringify(result));
-       // CourseTableComponent.RestoreMyCourses();
+        localStorage.setItem(test, JSON.stringify(result!));
 
-      }
     };
+    if((e.target as HTMLButtonElement).classList.contains('add-two')){
+      let test: string = (e.target as HTMLButtonElement).title;
+      let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+      CourseTableComponent.FrameSchedule.push(result!);
+      //Localstorage sparar kursdatan
+      localStorage.setItem(test, JSON.stringify(result!));
+      alert("Kurs " + result!.courseName + " är tillaggd till din lista.");
+    }
   });
 });
