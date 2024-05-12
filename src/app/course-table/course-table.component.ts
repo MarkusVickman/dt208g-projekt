@@ -65,11 +65,9 @@ export class CourseTableComponent implements AfterViewInit {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
     let readMore = document.getElementById("read-more");
     let closingDiv = document.getElementById("closingDiv");
-
-
-    //if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
-    //let test: string = (e.target as HTMLButtonElement).title;
     let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+
+     //document.getElementById(result!.courseCode)!.style.display = "none";
 
     if (result && readMore) {
       readMore!.style.display = "block";
@@ -133,6 +131,12 @@ export class CourseTableComponent implements AfterViewInit {
       button1.style.borderColor = "black";
       button1.style.margin = "10px";
 
+      let message = document.createElement("p");
+      message.id = result.courseCode;
+      message.style.display = "none";
+      let messageText = document.createTextNode("Kurs " + result.courseName + " är tillagd i ditt ramschema.");
+      message.appendChild(messageText);
+
       readMore.appendChild(h3);
       readMore.appendChild(p0);
       readMore.appendChild(p1);
@@ -142,27 +146,17 @@ export class CourseTableComponent implements AfterViewInit {
       readMore.appendChild(a0);
       readMore.appendChild(button);
       readMore.appendChild(button1);
+      readMore.appendChild(message);
     }
-
   };
 
-
-  add(test: string, checkWhichButton: boolean): void {
+  add(test: string): void {
     document.getElementById(test)!.classList.add('clickedButton');
     let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
     CourseTableComponent.FrameSchedule.push(result!);
+    
     //Localstorage sparar kursdatan
     localStorage.setItem(test, JSON.stringify(result!));
-
-    if (checkWhichButton === false) {
-      let readMore = document.getElementById("read-more");
-      let p0 = document.createElement("p");
-      let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
-      p0.style.fontWeight = "500";
-      p0.style.color = "blue";
-      p0.appendChild(p0Text);
-      readMore!.appendChild(p0);
-    }
   }
 
  addtwo(){
@@ -175,8 +169,9 @@ export class CourseTableComponent implements AfterViewInit {
       }
       if ((e.target as HTMLButtonElement).classList.contains('add-two')) {
         let test: string = (e.target as HTMLButtonElement).title;
-        let checkWhichButton: boolean = false;
-        this.add(test, checkWhichButton);
+          document.getElementById(test)!.style.display = "block";
+
+        this.add(test);
       }
     })
   }
@@ -210,38 +205,3 @@ export class CourseTableComponent implements AfterViewInit {
   }
 
 };
-
-
-
-/*
-document.addEventListener('DOMContentLoaded', () => {
-  const main: HTMLElement = document.getElementById("main") as HTMLElement;
-  main.addEventListener("click", (e) => {
-    if ((e.target as HTMLButtonElement).classList.contains('add')) {
-      let test: string = (e.target as HTMLButtonElement).id;
-      document.getElementById((e.target as HTMLButtonElement).id)!.classList.add('clickedButton');
-      let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ /*null;
-
-CourseTableComponent.FrameSchedule.push(result!);
-//Localstorage sparar kursdatan
-localStorage.setItem(test, JSON.stringify(result!));
-
-};*/
-/* if((e.target as HTMLButtonElement).classList.contains('add-two')){
-   let test: string = (e.target as HTMLButtonElement).title;
-   let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ //null;
-/*  CourseTableComponent.FrameSchedule.push(result!);
-  //Localstorage sparar kursdatan
-  localStorage.setItem(test, JSON.stringify(result!));
-
-  let readMore = document.getElementById("read-more");
-  let p0 = document.createElement("p");
-  let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
-  p0.style.fontWeight = "500";
-  p0.style.color = "blue";
-  p0.appendChild(p0Text);
-
-  readMore!.appendChild(p0);
-}
-});
-});*/
