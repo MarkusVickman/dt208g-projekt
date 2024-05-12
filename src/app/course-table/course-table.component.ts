@@ -56,99 +56,131 @@ export class CourseTableComponent implements AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.readSubject();
-      this.showMore();
+      // this.showMore();
+      this.addtwo();
     })
   }
 
-  showMore() {
+  showMore(test: string): void {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
     let readMore = document.getElementById("read-more");
     let closingDiv = document.getElementById("closingDiv");
 
-    main.addEventListener("click", (e) => {
-      if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
-        let test: string = (e.target as HTMLButtonElement).title;
-        let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
 
-        if (result && readMore) {
-          readMore!.style.display = "block";
-          closingDiv!.style.display = "block";
-          readMore.innerHTML = "";
+    //if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
+    //let test: string = (e.target as HTMLButtonElement).title;
+    let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
 
-          let points = result.points as unknown;
+    if (result && readMore) {
+      readMore!.style.display = "block";
+      closingDiv!.style.display = "block";
+      readMore.innerHTML = "";
 
-          let h3 = document.createElement("h3");
-          let h3Text = document.createTextNode(result.courseName);
-          h3.style.fontWeight = "500";
-          h3.appendChild(h3Text);
+      let points = result.points as unknown;
 
-          let p0 = document.createElement("p");
-          let p0Text = document.createTextNode("Kurskod: " + result.courseCode);
-          p0.style.fontWeight = "bold";
-          p0.appendChild(p0Text);
+      let h3 = document.createElement("h3");
+      let h3Text = document.createTextNode(result.courseName);
+      h3.style.fontWeight = "500";
+      h3.appendChild(h3Text);
 
-          let p1 = document.createElement("p");
-          let p1Text = document.createTextNode("Nivå: " + result.level);
-          p1.appendChild(p1Text);
+      let p0 = document.createElement("p");
+      let p0Text = document.createTextNode("Kurskod: " + result.courseCode);
+      p0.style.fontWeight = "bold";
+      p0.appendChild(p0Text);
 
-          let p2 = document.createElement("p");
-          let p2Text = document.createTextNode("Poäng: " + points as string);
-          p2.appendChild(p2Text);
+      let p1 = document.createElement("p");
+      let p1Text = document.createTextNode("Nivå: " + result.level);
+      p1.appendChild(p1Text);
 
-          let p3 = document.createElement("p");
-          let p3Text = document.createTextNode("Ämne: " + result.subject);
-          p3.appendChild(p3Text);
+      let p2 = document.createElement("p");
+      let p2Text = document.createTextNode("Poäng: " + points as string);
+      p2.appendChild(p2Text);
 
-          let p4 = document.createElement("p");
-          let p4Text = document.createTextNode("Progression: " + result.progression);
-          p4.appendChild(p4Text);
+      let p3 = document.createElement("p");
+      let p3Text = document.createTextNode("Ämne: " + result.subject);
+      p3.appendChild(p3Text);
 
-          let a0 = document.createElement("a");
-          let a0Text = document.createTextNode("Kursplan");
-          a0.appendChild(a0Text);
-          a0.href = result.syllabus;
-          a0.style.display = "block";
+      let p4 = document.createElement("p");
+      let p4Text = document.createTextNode("Progression: " + result.progression);
+      p4.appendChild(p4Text);
 
-          let button = document.createElement("button");
-          let buttonText = document.createTextNode("Lägg till");
-          button.appendChild(buttonText);
-          button.title = result.courseCode;
-          button.classList.add("add-two");
-          button.style.backgroundColor = "white";
-          button.style.borderRadius = "5px";
-          button.style.padding = "5px";
-          button.style.borderWidth = "1px";
-          button.style.borderColor = "black";
-          button.style.margin = "10px";
+      let a0 = document.createElement("a");
+      let a0Text = document.createTextNode("Kursplan");
+      a0.appendChild(a0Text);
+      a0.href = result.syllabus;
+      a0.style.display = "block";
 
-          let button1 = document.createElement("button");
-          let button1Text = document.createTextNode("Stäng");
-          button1.appendChild(button1Text);
-          button1.classList.add("close");
-          button1.style.backgroundColor = "white";
-          button1.style.borderRadius = "5px";
-          button1.style.padding = "5px";
-          button1.style.borderWidth = "1px";
-          button1.style.borderColor = "black";
-          button1.style.margin = "10px";
+      let button = document.createElement("button");
+      let buttonText = document.createTextNode("Lägg till");
+      button.appendChild(buttonText);
+      button.title = result.courseCode;
+      button.classList.add("add-two");
+      button.style.backgroundColor = "white";
+      button.style.borderRadius = "5px";
+      button.style.padding = "5px";
+      button.style.borderWidth = "1px";
+      button.style.borderColor = "black";
+      button.style.margin = "10px";
 
-          readMore.appendChild(h3);
-          readMore.appendChild(p0);
-          readMore.appendChild(p1);
-          readMore.appendChild(p2);
-          readMore.appendChild(p3);
-          readMore.appendChild(p4);
-          readMore.appendChild(a0);
-          readMore.appendChild(button);
-          readMore.appendChild(button1);
-        }
-      }
+      let button1 = document.createElement("button");
+      let button1Text = document.createTextNode("Stäng");
+      button1.appendChild(button1Text);
+      button1.classList.add("close");
+      button1.style.backgroundColor = "white";
+      button1.style.borderRadius = "5px";
+      button1.style.padding = "5px";
+      button1.style.borderWidth = "1px";
+      button1.style.borderColor = "black";
+      button1.style.margin = "10px";
+
+      readMore.appendChild(h3);
+      readMore.appendChild(p0);
+      readMore.appendChild(p1);
+      readMore.appendChild(p2);
+      readMore.appendChild(p3);
+      readMore.appendChild(p4);
+      readMore.appendChild(a0);
+      readMore.appendChild(button);
+      readMore.appendChild(button1);
+    }
+
+  };
+
+
+  add(test: string, checkWhichButton: boolean): void {
+    document.getElementById(test)!.classList.add('clickedButton');
+    let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+    CourseTableComponent.FrameSchedule.push(result!);
+    //Localstorage sparar kursdatan
+    localStorage.setItem(test, JSON.stringify(result!));
+
+    if (checkWhichButton === false) {
+      let readMore = document.getElementById("read-more");
+      let p0 = document.createElement("p");
+      let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
+      p0.style.fontWeight = "500";
+      p0.style.color = "blue";
+      p0.appendChild(p0Text);
+      readMore!.appendChild(p0);
+    }
+  }
+
+ addtwo(){
+    document.addEventListener("click", (e) => {
+      let readMore = document.getElementById("read-more");
+      let closingDiv = document.getElementById("closingDiv");
       if ((e.target as HTMLButtonElement).classList.contains('close')) {
         readMore!.style.display = "none";
         closingDiv!.style.display = "none";
       }
+      if ((e.target as HTMLButtonElement).classList.contains('add-two')) {
+        let test: string = (e.target as HTMLButtonElement).title;
+        let checkWhichButton: boolean = false;
+        this.add(test, checkWhichButton);
+      }
     })
-  };
+  }
+
 
   private readSubject(): void {
     for (let i = 0; i < CourseTableComponent.Courses.length; i++) {
@@ -179,34 +211,37 @@ export class CourseTableComponent implements AfterViewInit {
 
 };
 
+
+
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const main: HTMLElement = document.getElementById("main") as HTMLElement;
   main.addEventListener("click", (e) => {
     if ((e.target as HTMLButtonElement).classList.contains('add')) {
       let test: string = (e.target as HTMLButtonElement).id;
       document.getElementById((e.target as HTMLButtonElement).id)!.classList.add('clickedButton');
-      let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+      let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ /*null;
 
-        CourseTableComponent.FrameSchedule.push(result!);
-        //Localstorage sparar kursdatan
-        localStorage.setItem(test, JSON.stringify(result!));
+CourseTableComponent.FrameSchedule.push(result!);
+//Localstorage sparar kursdatan
+localStorage.setItem(test, JSON.stringify(result!));
 
-    };
-    if((e.target as HTMLButtonElement).classList.contains('add-two')){
-      let test: string = (e.target as HTMLButtonElement).title;
-      let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
-      CourseTableComponent.FrameSchedule.push(result!);
-      //Localstorage sparar kursdatan
-      localStorage.setItem(test, JSON.stringify(result!));
+};*/
+/* if((e.target as HTMLButtonElement).classList.contains('add-two')){
+   let test: string = (e.target as HTMLButtonElement).title;
+   let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ //null;
+/*  CourseTableComponent.FrameSchedule.push(result!);
+  //Localstorage sparar kursdatan
+  localStorage.setItem(test, JSON.stringify(result!));
 
-      let readMore = document.getElementById("read-more");
-      let p0 = document.createElement("p");
-      let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
-      p0.style.fontWeight = "500";
-      p0.style.color = "blue";
-      p0.appendChild(p0Text);
+  let readMore = document.getElementById("read-more");
+  let p0 = document.createElement("p");
+  let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
+  p0.style.fontWeight = "500";
+  p0.style.color = "blue";
+  p0.appendChild(p0Text);
 
-      readMore!.appendChild(p0);
-    }
-  });
+  readMore!.appendChild(p0);
+}
 });
+});*/
