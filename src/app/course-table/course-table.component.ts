@@ -198,7 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
       CourseTableComponent.FrameSchedule.push(result!);
       //Localstorage sparar kursdatan
       localStorage.setItem(test, JSON.stringify(result!));
-      alert("Kurs " + result!.courseName + " är tillaggd till din lista.");
+
+      let readMore = document.getElementById("read-more");
+      let p0 = document.createElement("p");
+      let p0Text = document.createTextNode("Kurs " + result!.courseName + " är tillagd i ditt ramschema.");
+      p0.style.fontWeight = "500";
+      p0.style.color = "blue";
+      p0.appendChild(p0Text);
+
+      readMore!.appendChild(p0);
     }
   });
 });

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { GetFrameScheduleService } from '../service/get-frame-schedule.service';
 import { Courses } from '../models/Courses';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-frame-schedule',
@@ -21,7 +22,7 @@ import { Courses } from '../models/Courses';
 })
 
 export class FrameScheduleComponent implements AfterViewInit {
-  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'show-more'];
+  displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'showmore'];
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
@@ -43,13 +44,10 @@ export class FrameScheduleComponent implements AfterViewInit {
       FrameScheduleComponent.Courses = data;
 
       this.readSubject();
-      console.log(FrameScheduleComponent.Courses);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.calculateTotal();
       this.countCourses();
-      this.remove();
-      this.showMore();
     })
   }
 
@@ -61,17 +59,15 @@ export class FrameScheduleComponent implements AfterViewInit {
   }
 
   countCourses() {
+    this.numberOfCourses = 0;
     this.numberOfCourses = FrameScheduleComponent.Courses.length;
   }
 
-  showMore() {
+  showMore(test: string) {
     const main: HTMLElement = document.getElementById("main") as HTMLElement;
     let readMore = document.getElementById("read-more");
     let closingDiv = document.getElementById("closingDiv");
 
-    main.addEventListener("click", (e) => {
-      if ((e.target as HTMLButtonElement).classList.contains('show-more')) {
-        let test: string = (e.target as HTMLButtonElement).title;
         let result = FrameScheduleComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
 
         if (result && readMore) {
@@ -146,35 +142,30 @@ export class FrameScheduleComponent implements AfterViewInit {
           readMore.appendChild(button);
           readMore.appendChild(button1);
         }
-      }
-      if ((e.target as HTMLButtonElement).classList.contains('close')) {
-        readMore!.style.display = "none";
-        closingDiv!.style.display = "none";
-      }
-    })
-  };
 
+        main.addEventListener("click", (e) => {    
+          if ((e.target as HTMLButtonElement).classList.contains('close')) {
+            readMore!.style.display = "none";
+            closingDiv!.style.display = "none";
+          }
+          if ((e.target as HTMLButtonElement).classList.contains('remove-two')) {
+            let test: string = (e.target as HTMLButtonElement).id;
+            this.remove(test);
+          }
+      })
+    }
+  //};
 
-  remove() {
-    const main: HTMLElement = document.getElementById("main") as HTMLElement;
+  remove(test: string) {
     const readMore = document.getElementById("read-more");
     const closingDiv = document.getElementById("closingDiv");
 
-    main.addEventListener("click", (e) => {
-      if ((e.target as HTMLButtonElement).classList.contains('remove') || (e.target as HTMLButtonElement).classList.contains('remove-two')) {
-        let test: string = (e.target as HTMLButtonElement).id;
-
+        readMore!.style.display = "none";
+        closingDiv!.style.display = "none";
         //Localstorage sparar kursdatan
         localStorage.removeItem(test);
         this.ngAfterViewInit();
-
-        if ((e.target as HTMLButtonElement).classList.contains('remove-two')) {
-          readMore!.style.display = "none";
-          closingDiv!.style.display = "none";
-        }
       };
-    });
-  }
 
   private readSubject(): void {
     for (let i = 0; i < FrameScheduleComponent.Courses.length; i++) {
