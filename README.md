@@ -1,5 +1,5 @@
 # Projekt, dt208g - Programmering i TypeScript
-Det här repot innehåller koden för webbplatsen [Höga Kusten-Högskolan](https://highcoast-college.netlify.app/). Webbplatsen är lösningen på projektuppgiften i kursen Programmering i TypeScript.
+Det här repot innehåller koden för webbplatsen [Höga Kusten-Högskolan](https://highcoast-college.netlify.app/). Webbplatsen är lösningen på projektuppgiften i kursen Programmering i TypeScript. Uppgiften gick ut på att skapa en enklare webbplats åt ett lärosäte.
 
 ## Webbplatsen 
 * Angular med material UI har använts för att skapa webbplatsen.
