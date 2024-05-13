@@ -3,7 +3,7 @@ Det här repot innehåller koden för webbplatsen [Höga Kusten-Högskolan](http
 
 ## Webbplatsen 
 * Angular med material UI har använts för att skapa webbplatsen.
-* Komponenter för footer, header, kurstabell, ramschematabell och en för varje sida startsidan, kurser, ramschema och en för "page not found".
+* Komponenter för footer, header, kurstabell, ramschematabell. Ytterligare komponenter för varje sida: startsidan, kurser, ramschema och en för "page not found".
   * Headern innehåller navigering, logotyp och backgrundsbild.
   * Footern innehåller länkar som hänvisar till använt bildmaterial och länkar till socialamedier och kontaktvägar.
   * Startsidan innehåller artiklar med information om skolan.
