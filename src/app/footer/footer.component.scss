@@ -1,4 +1,4 @@
- 
+ //Footer fixerad i botten
   #footer {
     position: absolute;
     bottom: 0;
@@ -31,6 +31,7 @@ footer a{
   margin-left: 25px;
 }
 
+//Bakgrund till footer
 #background{
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
   url("/assets/images/testhero.jpg");

@@ -1,71 +1,79 @@
-<div  id="table">
-<mat-form-field class="mat-form-field">
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-</mat-form-field>
+  <!-- tabell från material UI -->
+<div id="table">
+    <!-- Sök/filtrering -->
+  <mat-form-field class="mat-form-field">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. programmering" #input>
+  </mat-form-field>
 
-<mat-form-field class="mat-form-field">
-  <mat-label>Alla ämnen</mat-label>
-  <mat-select [(value)]="selected" (valueChange)="selectFilter()">
-    <mat-option value="">Alla</mat-option>
-    <mat-option *ngFor="let subject of subjects" value="{{subject}}">{{ subject }}</mat-option>
-  </mat-select>
-</mat-form-field>
+  <mat-form-field class="mat-form-field">
+    <mat-label>Alla ämnen</mat-label>
+    <mat-select [(value)]="selected" (valueChange)="selectFilter()">
+      <mat-option value="">Alla</mat-option>
+      <mat-option *ngFor="let subject of subjects" value="{{subject}}">{{ subject }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- tabell -->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Kurskod Column -->
+      <ng-container matColumnDef="courseCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Kod</th>
+        <td mat-cell *matCellDef="let row" class="large-screen">{{row.courseCode}}</td>
+      </ng-container>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="courseCode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Kod</th>
-      <td mat-cell *matCellDef="let row" class="large-screen">{{row.courseCode}}</td>
-    </ng-container>
+      <!-- Kursnamn Column -->
+      <ng-container matColumnDef="courseName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursnamn </th>
+        <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
+      </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container matColumnDef="courseName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursnamn </th>
-      <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
-    </ng-container>
+      <!-- poäng Column -->
+      <ng-container matColumnDef="points">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Poäng</th>
+        <td mat-cell *matCellDef="let row">{{row.points}}hp</td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="points">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Poäng</th>
-      <td mat-cell *matCellDef="let row">{{row.points}}hp</td>
-    </ng-container>
+      <!-- ämne Column -->
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Ämne</th>
+        <td mat-cell *matCellDef="let row" class="large-screen">{{row.subject}}</td>
+      </ng-container>
 
-    <!-- Fruit Column -->
-    <ng-container matColumnDef="subject">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Ämne</th>
-      <td mat-cell *matCellDef="let row" class="large-screen">{{row.subject}}</td>
-    </ng-container>
+      <!-- kursplan Column -->
+      <ng-container matColumnDef="syllabus">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen"> Kursplan </th>
+        <td mat-cell *matCellDef="let row" class="large-screen"><a href="{{row.syllabus}}">Kursplan</a></td>
+      </ng-container>
 
-    <ng-container matColumnDef="syllabus">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen"> Kursplan </th>
-      <td mat-cell *matCellDef="let row" class="large-screen"><a href="{{row.syllabus}}">Kursplan</a></td>
-    </ng-container>
+      <!-- lägg till-knapp Column -->
+      <ng-container matColumnDef="add">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row"><button class="add large-screen" id="{{row.courseCode}}btn"
+            on-click="add(row.courseCode)">Lägg till</button></td>
+      </ng-container>
 
-    <ng-container matColumnDef="add">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row"><button class="add large-screen" id="{{row.courseCode}}btn" on-click="add(row.courseCode)">Lägg till</button></td>
-    </ng-container>
+      <!-- Läs mer-knapp Column -->
+      <ng-container matColumnDef="show-more">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row"><button class="show-more small-screen" title="{{row.courseCode}}"
+            on-click="showMore(row.courseCode)">Läs mer</button></td>
+      </ng-container>
 
-    <ng-container matColumnDef="show-more">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row"><button class="show-more small-screen" title="{{row.courseCode}}" on-click="showMore(row.courseCode)">Läs mer</button></td>
-    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">Ingen kurs matchar din sökning "{{input.value}}"</td>
-    </tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <!-- Ingen kurs matchar din sökning -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">Ingen kurs matchar din sökning "{{input.value}}"</td>
+      </tr>
+    </table>
+      <!-- Paginering och val för hur många som ska visas per sida -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
 </div>
-</div>
 
+<!-- Div för att stänga informationsrutan i mobilläge och en div med information för mobilläge -->
 <div id="closingDiv" class="close"></div>
 <div id="read-more"></div>

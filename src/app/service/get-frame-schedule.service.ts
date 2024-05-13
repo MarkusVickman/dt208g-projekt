@@ -1,3 +1,4 @@
+//Service för att hämta kursdata som är lagrat i localstorage (egen valda)
 import { Injectable } from '@angular/core';
 import { Courses } from '../course-table/course-table.component';
 import { of } from 'rxjs';
@@ -6,12 +7,14 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 
+//Klass för att hämta kursdata från localstorage
 export class GetFrameScheduleService {
-
+  //Variabel för kursdata
   Courses: Courses[] = [];
   constructor() { }
 
-  getMyCourses()/*: Observable<Courses[]>*/ {
+  //Metod som hämtar data från localstorage och returnerar courses
+  getMyCourses() {
     this.Courses = [];
     if (localStorage.length >= 1) {
       for (let i = 0; i < localStorage.length; i++) {

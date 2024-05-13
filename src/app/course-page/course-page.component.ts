@@ -1,3 +1,4 @@
+//Sida som innehåller komponent med tabell över alla kurser
 import { Component } from '@angular/core';
 import { CourseTableComponent } from '../course-table/course-table.component';
 

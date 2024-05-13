@@ -1,7 +1,9 @@
+  <!-- tabell från material UI -->
 <div id="table">
+      <!-- Sök/filtrering -->
   <mat-form-field class="mat-form-field">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. programmering" #input>
   </mat-form-field>
 
   <mat-form-field class="mat-form-field">
@@ -12,45 +14,48 @@
 
     </mat-select>
   </mat-form-field>
-
+  <!-- tabell -->
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
-      <!-- ID Column -->
+      <!-- Kurskod Column -->
       <ng-container matColumnDef="courseCode">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Kod</th>
         <td mat-cell *matCellDef="let row" class="large-screen">{{row.courseCode}}</td>
       </ng-container>
 
-      <!-- Progress Column -->
+      <!-- Kursnamn Column -->
       <ng-container matColumnDef="courseName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Kursnamn </th>
         <td mat-cell *matCellDef="let row"> {{row.courseName}}</td>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- poäng Column -->
       <ng-container matColumnDef="points">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Poäng</th>
         <td mat-cell *matCellDef="let row">{{row.points}}hp</td>
       </ng-container>
 
-      <!-- Fruit Column -->
+      <!-- ämne Column -->
       <ng-container matColumnDef="subject">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen">Ämne</th>
         <td mat-cell *matCellDef="let row" class="large-screen">{{row.subject}}</td>
       </ng-container>
 
+            <!-- kursplan Column -->
       <ng-container matColumnDef="syllabus">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="large-screen"> Kursplan </th>
         <td mat-cell *matCellDef="let row" class="large-screen"><a href="{{row.syllabus}}">Kursplan</a></td>
       </ng-container>
 
+            <!-- lägg till-knapp Column -->
       <ng-container matColumnDef="add">
         <th mat-header-cell *matHeaderCellDef class="large-screen"></th>
         <td mat-cell *matCellDef="let row" class="large-screen"><button class="remove" id="{{row.courseCode}}" on-click="remove(row.courseCode)">Ta
             bort</button></td>
       </ng-container>
 
+            <!-- Läs mer-knapp Column -->
       <ng-container matColumnDef="showmore">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row"><button class="showmore small-screen" title="{{row.courseCode}}" on-click="showMore(row.courseCode)">Läs
@@ -60,16 +65,18 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      <!-- Row shown when there is no matching data. -->
+
+      <!-- Ingen kurs matchar din sökning -->
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">Inga matchade kurser. "{{input.value}}"</td>
       </tr>
     </table>
-
+      <!-- Paginering och val för hur många som ska visas per sida -->
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
   </div>
 </div>
+<!-- Div för att stänga informationsrutan i mobilläge och en div med information för mobilläge. P med antal valda kurser och poäng-->
 <p id="totalPoints">{{numberOfCourses}} kurser ger sammanlagt {{totalPoints}} HP.</p>
 <div id="closingDiv" class="close"></div>
 <div id="read-more"></div>

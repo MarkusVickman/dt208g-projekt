@@ -9,6 +9,7 @@ h2 {
     margin-top: 20px;
 }
 
+//Klass för all artikelbilder
 .img {
     width: 500px;
     max-width: 100%;
@@ -17,6 +18,7 @@ h2 {
     margin-bottom: -20px;
 }
 
+//Backgrund till text på heroimg
 .tinted-background {
     position: absolute;
     background-color: rgba($color: #000000, $alpha: 0.6);
@@ -28,10 +30,12 @@ h2 {
     top: 270px;
 }
 
+//H2 i heroimg
 #h2-tinted {
     margin-top: 7px;
 }
 
+//artikel"behållare
 .article-container {
     width: 500px;
     max-width: 100%;
@@ -53,17 +57,12 @@ p {
     margin-top: -10px;
 }
 
+//Heroimg div
 #hero {
-    /* max-width: 100%;
-    background-image: url("/assets/images/outside1200.jpg");
-    width: 1200px;
-    height: 600px;
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position: center;*/
     max-width: 100%;
 }
 
+//Hero-bild
 #hero-img {
     max-width: 100%;
     width: 1200px;
@@ -130,6 +129,7 @@ button:active {
     }
 }
 
+/*Media querie för extra små skärmar*/
 @media screen and (max-width: 500px) {
     .article-container {
         margin-left: 0;

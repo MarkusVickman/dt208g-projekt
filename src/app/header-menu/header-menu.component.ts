@@ -11,6 +11,8 @@ import {MatTabsModule} from '@angular/material/tabs';
   standalone: true,
   imports: [RouterLink, RouterLinkActive, MatButtonModule, MatTabsModule]
 })
+
+//header med meny från material UI
 export class HeaderMenuComponent {
   links = ['First', 'Second', 'Third'];
   activeLink = this.links[0];
@@ -19,5 +21,4 @@ export class HeaderMenuComponent {
   toggleBackground() {
     this.background = this.background ? undefined : 'primary';
   }
-
 }

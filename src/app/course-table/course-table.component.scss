@@ -1,79 +1,87 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  .mat-form-field {
-    display: inline-block;
-    width: 300px;
-    margin: 20px;
-  }
+//bredd på input till formuläret
+.mat-form-field {
+  display: inline-block;
+  width: 300px;
+  margin: 20px;
+}
 
-  button {
-    background-color: white;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: rgb(178, 178, 178);
-    border-width: 1.1px;
-    font-weight: 500;
-    font-size: 0.9em;
-    padding: 5px;
-  }
-
-  button:hover {
-    border-color: black;
-  }
-
-  button:active {
-    background-color: rgb(199, 199, 199);
-  }
-
-  .clickedButton{
-    background-color: rgb(237, 237, 237);
-  }
-  
-  .small-screen{
-    display: none;
-  }
-  
-  .large-screen{
-    display: default;
-  }
-  
-  #read-more{
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
-    max-width: 100%;
-    left: 50%;
-    top: 200px;
-    transform: translate(-50%);
-    position: fixed;
-    width: 350px;
+button {
   background-color: white;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgb(178, 178, 178);
+  border-width: 1.1px;
+  font-weight: 500;
+  font-size: 0.9em;
+  padding: 5px;
+}
+
+button:hover {
+  border-color: black;
+}
+
+button:active {
+  background-color: rgb(199, 199, 199);
+}
+
+.clickedButton {
+  background-color: rgb(237, 237, 237);
+}
+
+//ändrar vilka kolumner som ska visas i formuläret
+.small-screen {
+  display: none;
+}
+
+//ändrar vilka kolumner som ska visas i formuläret
+.large-screen {
+  display: default;
+}
+
+//En ruta för att visa information från formuläret i mobilläget
+#read-more {
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
+  max-width: 100%;
+  left: 50%;
+  top: 200px;
+  transform: translate(-50%);
+  position: fixed;
+  width: 350px;
+  background-color: white;
+}
+
+//heltäckande div för att stänga informationsrutan i mobilläget
+#closingDiv {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  display: none;
+}
+
+//knapp
+.add-two {
+  padding: 20px;
+  background-color: white;
+}
+
+//Bredd på valfält
+option {
+  width: 250px;
+}
+
+//media querie för småskärmar. ändrar vilka kolumner som ska visas i formuläret
+@media screen and (max-width: 700px) {
+  .small-screen {
+    display: block;
   }
-  
-  #closingDiv{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    position: fixed;
-    top: 0;
+
+  .large-screen {
     display: none;
   }
-  
-  .add-two{
-    padding: 20px;
-    background-color: white;
-  }
-  
-  option {
-    width: 250px;
-  }
-  
-  @media screen and (max-width: 700px) {
-    .small-screen{
-      display: block;
-    }
-    
-    .large-screen{
-      display: none;
-    }
-  }
+}

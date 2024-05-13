@@ -1,5 +1,6 @@
-
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+/*Component för tabell över alla kurser.*/
+//Import av allt som importeras.
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -33,42 +34,58 @@ export interface Courses {
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, HttpClientModule, MatSelectModule, FormsModule, NgFor]
 })
 
+//Class för all hantering av formuläret.
 export class CourseTableComponent implements AfterViewInit {
+  
+  //Knyter ihop kolumnerna med de som skapas i html. Här bestäms namn och antal.
   displayedColumns: string[] = ['courseCode', 'courseName', 'points', 'subject', 'syllabus', 'add', 'show-more'];
+  
+  //Variabel med data över alla kurser som även innehåller information om bland annat filtrering och sortering.
   dataSource: MatTableDataSource<Courses> = new MatTableDataSource<Courses>();
-
+  
+  //Hantering av paginering och sortering
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
   @ViewChild(MatSort) sort: MatSort = <MatSort>{};
 
-  public static Courses: Courses[] = [];
-  public static FrameSchedule: Courses[] = [];
-  public static filteredCourses: Courses[] = [];
-  selected: string = "";
-  subjects: string[] = [];
+  //variabler för alla kurser, filtrerade kurser, vad som sparas till ramschema.
+  private Courses: Courses[] = [];
+  private FrameSchedule: Courses[] = [];
+  private filteredCourses: Courses[] = [];
+  
+  //Variabel för vald kategori och en med lista över alla tillgängliga kategorier
+  public selected: string = "";
+  public subjects: string[] = [];
 
+  //Konstruktor som hämtar data med från en service som använder httpClient 
   constructor(private GetCoursesService: GetCoursesService) { }
 
-  ngAfterViewInit() {
+  //"Huvudklassen" som efter vyinitiering initierar data prenumeration och tilldelar den datan till dataSource och en extra kurslista. 
+  public ngAfterViewInit(): void {
     this.GetCoursesService.getCourses().subscribe((data) => {
-      // Assign the data to the data source for the table to render
       this.dataSource = new MatTableDataSource(data);
-      CourseTableComponent.Courses = data;
+      this.Courses = data;
+      
+      //Paginering och sortering initieras.
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      
+      //Metoden readSubject körs för att läsa in hela listan med ämnen
       this.readSubject();
-      // this.showMore();
+      
+      //Metoden addtwo körs för att lägga till eventlisteners till popup rutan
       this.addtwo();
     })
   }
 
-  showMore(test: string): void {
-    const main: HTMLElement = document.getElementById("main") as HTMLElement;
+  //Metod som bygger upp en lista/popup-ruta för extra info om kurser i mobilläget
+  public showMore(test: string): void {
     let readMore = document.getElementById("read-more");
     let closingDiv = document.getElementById("closingDiv");
-    let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+    
+    //Hämtar information om en kurs baserat på kurskod som bifogas som parametern test
+    let result = this.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
 
-     //document.getElementById(result!.courseCode)!.style.display = "none";
-
+    //DOM-manupulering för extra information till mobilläget 
     if (result && readMore) {
       readMore!.style.display = "block";
       closingDiv!.style.display = "block";
@@ -108,6 +125,8 @@ export class CourseTableComponent implements AfterViewInit {
       a0.href = result.syllabus;
       a0.style.display = "block";
 
+      /*Knapp för att lägga till kursen till listan som använder klassen add-two 
+      för att idenfiera knappen och kursid som titel för att lägga till rätt kurs.*/
       let button = document.createElement("button");
       let buttonText = document.createTextNode("Lägg till");
       button.appendChild(buttonText);
@@ -120,6 +139,7 @@ export class CourseTableComponent implements AfterViewInit {
       button.style.borderColor = "black";
       button.style.margin = "10px";
 
+      /*Stänga knapp med klassen close för att identifiera*/
       let button1 = document.createElement("button");
       let button1Text = document.createTextNode("Stäng");
       button1.appendChild(button1Text);
@@ -131,6 +151,7 @@ export class CourseTableComponent implements AfterViewInit {
       button1.style.borderColor = "black";
       button1.style.margin = "10px";
 
+      /*Ett p element med meddelande och kursid som id för att kunna identifiera och visa eller dölja meddelandet vid behov*/
       let message = document.createElement("p");
       message.id = result.courseCode;
       message.style.display = "none";
@@ -150,16 +171,18 @@ export class CourseTableComponent implements AfterViewInit {
     }
   };
 
-  add(test: string){
+  //Klass som initieras från html med bifogad parameter. Ändrar stil på knappen och lägger till kurs till listan 
+  public add(test: string): void {
     document.getElementById(test + "btn")!.classList.add('clickedButton');
-    let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
-    CourseTableComponent.FrameSchedule.push(result!);
-    
+    let result = this.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
+    this.FrameSchedule.push(result!);
+
     //Localstorage sparar kursdatan
     localStorage.setItem(test, JSON.stringify(result!));
   }
 
- addtwo(){
+  //klass med eventlisteners för att lägga till kurs i mobilläget och även stänga popup-rutan
+  private addtwo(): void {
     document.addEventListener("click", (e) => {
       let readMore = document.getElementById("read-more");
       let closingDiv = document.getElementById("closingDiv");
@@ -169,23 +192,23 @@ export class CourseTableComponent implements AfterViewInit {
       }
       if ((e.target as HTMLButtonElement).classList.contains('add-two')) {
         let test: string = (e.target as HTMLButtonElement).title;
-          document.getElementById(test)!.style.display = "block";
-
+        document.getElementById(test)!.style.display = "block";
         this.add(test);
       }
     })
   }
 
-
+  //Läsen in en array av ämnen som kan användas i valknappen i tabellen
   private readSubject(): void {
-    for (let i = 0; i < CourseTableComponent.Courses.length; i++) {
-      if (this.subjects.includes(CourseTableComponent.Courses[i].subject) == false) {
-        this.subjects.push(CourseTableComponent.Courses[i].subject);
+    for (let i = 0; i < this.Courses.length; i++) {
+      if (this.subjects.includes(this.Courses[i].subject) == false) {
+        this.subjects.push(this.Courses[i].subject);
       }
     }
   }
 
-  applyFilter(event: Event) {
+  //Lägger in filtret och initierar paginering från första sidan
+  public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -194,14 +217,14 @@ export class CourseTableComponent implements AfterViewInit {
     }
   }
 
-  selectFilter() {
-    CourseTableComponent.filteredCourses = CourseTableComponent.Courses.filter((Courses) => Courses.subject.includes(this.selected));
-    this.dataSource = new MatTableDataSource(CourseTableComponent.filteredCourses);
+  //Metod som använder filtrering för att ändast visa valt ämne i tabellen och sen startar paginering.
+  public selectFilter(): void {
+    this.filteredCourses = this.Courses.filter((Courses) => Courses.subject.includes(this.selected));
+    this.dataSource = new MatTableDataSource(this.filteredCourses);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-
 };
