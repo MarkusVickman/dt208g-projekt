@@ -1,9 +1,7 @@
 # Projekt, dt208g - Programmering i TypeScript
-
 Det här repot innehåller koden för webbplatsen [Höga Kusten-Högskolan](https://highcoast-college.netlify.app/). Webbplatsen är lösningen på projektuppgiften i kursen Programmering i TypeScript.
 
 ## Webbplatsen 
-
 * Angular med material UI har använts för att skapa webbplatsen.
 * Komponenter för footer, header, kurstabell, ramschematabell och en för varje sida startsidan, kurser, ramschema och en för "page not found".
   * Headern innehåller navigering, logotyp och backgrundsbild.
@@ -30,11 +28,12 @@ Det här repot innehåller koden för webbplatsen [Höga Kusten-Högskolan](http
   * Funktioner anropas direkt från html för att hämta data eller för att agera eventlistener.
 
 ## Responsivitet
-
-
+Webbplatsen är testad på android, linux, windows och iPhone i tillgängliga webbläsare ex. firefox, chromium och safari.
+Anpassningar för små skärmar:
+* Artiklarna på startsidan ändras från två i bredd till att visas en och en.
+* Tabellerna döljer och visar olika kolumner beroende av skärmbredd. Vid smal skärmbredd visas endast 2 kolumner och en "läs mer" visas. Vid klick på den visas all till gänglig information och kursen i en popup-ruta. Där finns även knappar för att stänga, lägga till eller ta bort. 
 
 ## Material UI
-
 Material UI lades till enligt den officiella guiden [Länk](https://material.angular.io/guide/getting-started).
 Material UI-element lades till likt moduler där stora anpassningar har gjorts för att anpassa till datan som skulle användas.
 Material används till följande:
