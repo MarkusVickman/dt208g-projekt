@@ -46,7 +46,7 @@
 
     <ng-container matColumnDef="add">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row"><button class="add large-screen" on-click="add(row.courseCode)">Lägg till</button></td>
+      <td mat-cell *matCellDef="let row"><button class="add large-screen" id="{{row.courseCode}}btn" on-click="add(row.courseCode)">Lägg till</button></td>
     </ng-container>
 
     <ng-container matColumnDef="show-more">

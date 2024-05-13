@@ -150,8 +150,8 @@ export class CourseTableComponent implements AfterViewInit {
     }
   };
 
-  add(test: string): void {
-    document.getElementById(test)!.classList.add('clickedButton');
+  add(test: string){
+    document.getElementById(test + "btn")!.classList.add('clickedButton');
     let result = CourseTableComponent.Courses.find(({ courseCode }) => courseCode === test) ?? /* default value */ null;
     CourseTableComponent.FrameSchedule.push(result!);
     
